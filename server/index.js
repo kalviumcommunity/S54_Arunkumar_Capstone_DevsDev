@@ -15,7 +15,6 @@ const app = express()
 
 // port
 const port = process.env.PORT || 4000
-console.log('port: ', port);
 
 // Middleware - json
 app.use(express.json())
