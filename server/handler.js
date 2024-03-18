@@ -10,7 +10,7 @@ const homeHandler = async(req,res)=>{
 
 const readData = async(req,res)=>{
     try {
-        res.send("Read API Successfully")
+        res.status(200).send("Read API Successfully")
     } catch (error) {
         res.status(500).json(error)
     }
@@ -18,7 +18,7 @@ const readData = async(req,res)=>{
 
 const createData = async(req,res)=>{
     try {
-        res.send("Successfully posted using post request")
+        res.status(201).send("Successfully posted using post request")
     } catch (error) {
         res.status(500).json(error)
     }
