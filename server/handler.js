@@ -16,6 +16,14 @@ const readData = async(req,res)=>{
     }
 }
 
+const createData = async(req,res)=>{
+    try {
+        res.send("Successfully posted using post request")
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 module.exports = {
     homeHandler,
     readData,

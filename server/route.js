@@ -8,6 +8,9 @@ const { homeHandler } = require('./handler')
 // Get req in home
 generalRouter.get('/',homeHandler)
 
+// Post request for adding data
+apiRouter.post( '/data/create', createData )
+
 module.exports = {
     generalRouter,
     apiRouter,
