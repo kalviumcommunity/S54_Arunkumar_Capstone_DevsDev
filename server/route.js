@@ -12,10 +12,10 @@ generalRouter.get('/',homeHandler)
 apiRouter.get( '/data', readData )
 
 // Post request for adding data
-generalRouter.post( '/data/create', createData )
+apiRouter.post( '/data/create', createData )
 
 // Put request for Updating data
-generalRouter.put( '/data/update/:id',updateData )
+apiRouter.put( '/data/update/:id',updateData )
 
 module.exports = {
     generalRouter,
