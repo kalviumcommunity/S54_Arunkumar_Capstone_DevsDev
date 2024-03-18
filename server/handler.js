@@ -27,4 +27,5 @@ const createData = async(req,res)=>{
 module.exports = {
     homeHandler,
     readData,
+    createData
 }
