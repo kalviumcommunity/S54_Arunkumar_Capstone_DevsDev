@@ -1,3 +1,5 @@
+const { dataModel } = require("./schema/dataSchema")
+
 // homeHandler (get)
 const homeHandler = async(req,res)=>{
 
@@ -13,7 +15,8 @@ const homeHandler = async(req,res)=>{
 const readData = async(req,res)=>{
 
     try {
-        res.status(200).send("Read API Successfully")
+        const readData = await dataModel.find()
+        res.status(200).json(readData)
     } catch (error) {
         res.status(500).json(error)
     }
@@ -24,7 +27,8 @@ const readData = async(req,res)=>{
 const createData = async(req,res)=>{
 
     try {
-        res.status(201).send("Successfully posted using post request")
+        const InputData = req.body
+        res.status(201).json(InputData)
     } catch (error) {
         res.status(500).json(error)
     }
