@@ -15,8 +15,8 @@ const homeHandler = async(req,res)=>{
 const readData = async(req,res)=>{
 
     try {
-        const readData = await dataModel.find()
-        res.status(200).json(readData)
+        const readDatas = await dataModel.find()
+        res.status(200).json(readDatas)
     } catch (error) {
         res.status(500).json(error)
     }
@@ -25,10 +25,15 @@ const readData = async(req,res)=>{
 
 //Creating Data
 const createData = async(req,res)=>{
-
+    
     try {
+        const readDatas = await dataModel.find()
         const InputData = req.body
+
+        await dataModel.insertMany(InputData)
+
         res.status(201).json(InputData)
+        console.log("data added successfully")
     } catch (error) {
         res.status(500).json(error)
     }
