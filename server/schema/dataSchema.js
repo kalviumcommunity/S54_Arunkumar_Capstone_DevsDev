@@ -16,7 +16,7 @@ const commentSchema = new mongoose.Schema({
 
     replies:{
         type : [mongoose.Schema.Types.ObjectId],
-        ref : 'userComments',
+        ref : 'UserComments',
     }
 
 })
@@ -58,10 +58,10 @@ const dataSchema = new mongoose.Schema(
 )
 
 // Model of dataSchema 
-const dataModel = new mongoose.model('inputData' ,dataSchema )
+const dataModel = new mongoose.model('InputData' ,dataSchema )
 
 // Model of Comment 
-const commentModel = new mongoose.model('userComments' ,commentSchema )
+const commentModel = new mongoose.model('UserComments' ,commentSchema )
 
 module.exports = {
     dataModel,
