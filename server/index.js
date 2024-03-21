@@ -6,6 +6,7 @@ const cors = require('cors')
 
 // importing routers
 const { generalRouter, apiRouter } = require('./route')
+const { mongoConnect } = require('./mongoConnect/mongoConnect')
 
 // importing dotenv
 const dotenv = require('dotenv').config()
@@ -30,3 +31,6 @@ app.use('/api',apiRouter)
 app.listen(port,()=>{
     console.log(`The server is running on http://localhost:${port}/`)
 })
+
+// connecting database 
+mongoConnect()
