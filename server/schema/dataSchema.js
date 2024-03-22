@@ -34,23 +34,24 @@ const dataSchema = new mongoose.Schema(
             default : 0 ,
         },
 
-        comments:{
-            type : [],
-            default : [],
-
-        },
-
-        replies:{
-            type : [],
-            default : [],
-
-        },
+        comments:[
+            {
+                commentText : {
+                    type : String,
+                    required:true,
+                },
+                replies:[{
+                    type : String,
+                    required:true,
+                }],
+            }
+        ]
     }
 )
 
 // Model of dataSchema 
-const dataModel = new mongoose.model('inputdatas' ,dataSchema )
+const DataModel = new mongoose.model('inputdatas' ,dataSchema )
 
 module.exports = {
-    dataModel,
+    DataModel,
 }

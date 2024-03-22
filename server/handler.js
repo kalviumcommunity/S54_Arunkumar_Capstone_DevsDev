@@ -1,4 +1,4 @@
-const { dataModel } = require("./schema/dataSchema")
+const { DataModel } = require("./schema/dataSchema")
 
 // homeHandler (get)
 const homeHandler = async(req,res)=>{
@@ -15,7 +15,7 @@ const homeHandler = async(req,res)=>{
 const readData = async(req,res)=>{
 
     try {
-        const readDatas = await dataModel.find()
+        const readDatas = await DataModel.find()
         res.status(200).json(readDatas)
     } catch (error) {
         res.status(500).json(error)
@@ -27,14 +27,16 @@ const readData = async(req,res)=>{
 const createData = async(req,res)=>{
     
     try {
-        const readDatas = await dataModel.find()
+
         const InputData = req.body
 
-        await dataModel.insertMany(InputData)
+        await DataModel.create(InputData)
 
-        res.status(201).json(InputData)
-        console.log("data added successfully")
+        res.status(201).json({data : InputData , message : "data added successfully"})
+        
+
     } catch (error) {
+        console.log(error)
         res.status(500).json(error)
     }
     
