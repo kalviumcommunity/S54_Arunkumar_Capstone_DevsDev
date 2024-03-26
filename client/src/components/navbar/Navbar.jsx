@@ -9,7 +9,7 @@ const Navbar = () => {
       <Link to='/'>
 
       <div>
-        <span className="bg-gradient-to-r from-[#FE5F6E] via-[#923CFF] to-[#2B7CFF] text-transparent bg-clip-text text-xl font-semibold">DevBook</span>
+        <span className="bg-gradient-to-r from-[#FE5F6E] via-[#923CFF] to-[#2B7CFF] text-transparent bg-clip-text text-xl font-semibold">Dev'sDev</span>
       </div>
 
       </Link>
