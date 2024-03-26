@@ -8,7 +8,7 @@ const Content = () => {
   return (
     <div className="grid grid-cols-6">
 
-        <div className="col-span-1 h-screen px-6 py-14 pb-28 borderGradient">
+        <div className="col-span-1 h-screen px-6 py-14 pb-24 borderGradient">
         
             <SideNav />
 
