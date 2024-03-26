@@ -5,16 +5,16 @@ import CommunityPage from '../Community/CommunityPage';
 import PricingPage from '../Pricing/PricingPage';
 import SavedPage from '../Saved/SavedPage';
 import RegisterPage from '../Register/RegisterPage';
+import PostPage from '../Post-Page/PostPage';
 
 const RoutesPage = () => {
   return (
     <Routes>
-      <Route path='/' component={LandingPage} />
-      <Route path='/community' component={CommunityPage} />
-      <Route path='/pricing' component={PricingPage} />
-      <Route path='/saved' component={SavedPage} />
-      <Route path='/register' component={RegisterPage}/>
-      {/* <Route path='*' component={} /> */}
+      <Route path='/' element={<PostPage />} />
+      <Route path='/community' element={<CommunityPage />} />
+      <Route path='/pricing' element={<PricingPage />} />
+      <Route path='/saved' element={<SavedPage />} />
+      <Route path='/register' element={<RegisterPage />} />
     </Routes>
   );
 }
