@@ -1,8 +1,9 @@
 import React from 'react'
 import SideNav from '../Side-Navbar/SideNav'
-import RoutesPage from '../Routes/RoutesPage'
 import PostPage from '../Post-Page/PostPage'
 import RightDiv from '../RightDiv/RightDiv'
+import CenterDiv from '../Center-Div/CenterDiv'
+import RoutesPage from '../Routes/RoutesPage'
 
 const Content = () => {
   return (
@@ -15,8 +16,8 @@ const Content = () => {
         </div>
 
         <div className="col-span-4 py-14 px-16">
-        
-          <PostPage />
+
+            <RoutesPage />
 
         </div>
 
@@ -25,7 +26,6 @@ const Content = () => {
           <RightDiv />
 
         </div>
-        
     </div>  
   )
 }

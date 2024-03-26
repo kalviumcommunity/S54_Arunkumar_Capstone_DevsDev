@@ -4,6 +4,7 @@ import Content from '../Content/Content';
 import RoutesPage from '../Routes/RoutesPage';
 import Footer from '../Footer/Footer';
 
+
 const LandingPage = () => {
   return (
      <>
