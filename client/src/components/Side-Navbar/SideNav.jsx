@@ -36,11 +36,12 @@ const SideNav = () => {
         ];
 
   return (
-    <div className="w-full flex flex-col">
+    <div className='h-full flex flex-col justify-between'>
+        <div className="w-full flex flex-col">
         {navOptions.map((option,i)=>
                 
             <Link key={option.key} to={option.path}>
-                <div className="flex justify-center items-center gap-8 px-6 py-4 optionHover" >
+                <div className="flex justify-center items-center gap-8 px-6 py-4" >
                     <img src={option.icon}/>
                     <span className="w-full">{option.name}</span>
                 </div>
@@ -48,6 +49,21 @@ const SideNav = () => {
             
             )
         }
+        </div>
+        <div className="flex flex-col">
+            <Link to='/help'>
+                <div className="flex justify-center items-center gap-8 px-6 py-4 optionHover" >
+                    <img src={savedIcon}/>
+                    <span className="w-full">Help</span>
+                </div>
+            </Link>
+            <Link to='/faqs'>
+                <div className="flex justify-center items-center gap-8 px-6 py-4 optionHover" >
+                    <img src={savedIcon}/>
+                    <span className="w-full">FAQs</span>
+                </div>
+            </Link>
+        </div>
     </div>
   )
 }
