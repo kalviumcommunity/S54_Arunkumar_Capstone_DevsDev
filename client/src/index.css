@@ -3,3 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body{
+  background-color: #181818;
+  color: white;
+}
+
+.borderGradient {
+  border-width: 0px 1px 0px 0px;
+  border-style: solid; 
+  border-image: linear-gradient(to bottom, #FE5F6E, #923CFF, #2B7CFF); 
+  border-image-slice: 1;
+}
+
+.borderGradientNav{
+  border-width: 0px 0px 1px 0px;
+  border-style: solid; 
+  border-image: linear-gradient(to right, #FE5F6E, #923CFF, #2B7CFF); 
+  border-image-slice: 1;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
