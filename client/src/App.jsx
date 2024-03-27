@@ -6,7 +6,7 @@ import RoutesPage from './components/Routes/RoutesPage'
 import LandingPage from './components/Landing-Page/LandingPage'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
