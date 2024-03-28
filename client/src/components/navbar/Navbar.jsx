@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+
 
 const Navbar = () => {
   
@@ -22,11 +24,18 @@ const Navbar = () => {
           />
         </div>
     
-        <Link to='/register'>
-          <button className="px-8 py-2 borderGradientButton">
-            <span className="bg-gradient-to-r from-[#923CFF] to-[#FE5F6E] text-transparent bg-clip-text">Register</span>
-          </button>
-        </Link>
+        <header>
+            <SignedOut>
+              <SignInButton>
+                  <button className="px-8 py-2 borderGradientButton">
+                    <span className="bg-gradient-to-r from-[#923CFF] to-[#FE5F6E] text-transparent bg-clip-text">Register</span>
+                  </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+        </header>
 
     </nav>
   );
