@@ -6,21 +6,21 @@ import RoutesPage from '../Routes/RoutesPage'
 
 const Content = () => {
   return (
-    <div className="grid grid-cols-6">
+    <div className="grid grid-cols-6 borderGradientNav">
 
-        <div className="col-span-1 h-screen px-6 py-14 pb-24 borderGradient">
+        <div className="col-span-1 h-screen px-6 py-14 pb-24">
         
             <SideNav />
 
         </div>
 
-        <div className="col-span-4 py-14 px-16">
+        <div className="col-span-4 py-14 px-20 overflow-y-auto borderGradient">
 
             <RoutesPage />
 
         </div>
 
-        <div className="col-span-1 border-l h-screen borderGradient px-6 py-14">
+        <div className="col-span-1 h-screen  px-6 py-14">
         
           <RightDiv />
 

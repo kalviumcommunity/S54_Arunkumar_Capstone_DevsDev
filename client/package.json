@@ -10,7 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+=======
     "@clerk/clerk-react": "^4.30.7",
+>>>>>>> 42b727cffe3be1311808096cea834873c3c79918
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3"
