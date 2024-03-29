@@ -3,6 +3,8 @@ import homeIcon from '../../assets/home-icon.svg';
 import communityIcon from '../../assets/community-icon.svg';
 import pricingIcon from '../../assets/pricing-icon.svg';
 import savedIcon from '../../assets/saved-icon.svg';
+// import helpIcon from '../../assets/help-icon.svg';
+// import faqsIcon from '../../assets/faqs-icon.svg';
 import { Link } from 'react-router-dom';
 
 
@@ -52,13 +54,13 @@ const SideNav = () => {
         </div>
         <div className="flex flex-col">
             <Link to='/help'>
-                <div className="flex justify-center items-center gap-8 px-6 py-4 optionHover" >
+                <div className="flex justify-center items-center gap-8 px-6 py-4 " >
                     <img src={savedIcon}/>
                     <span className="w-full">Help</span>
                 </div>
             </Link>
             <Link to='/faqs'>
-                <div className="flex justify-center items-center gap-8 px-6 py-4 optionHover" >
+                <div className="flex justify-center items-center gap-8 px-6 py-4" >
                     <img src={savedIcon}/>
                     <span className="w-full">FAQs</span>
                 </div>

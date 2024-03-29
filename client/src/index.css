@@ -10,7 +10,7 @@ body{
 }
 
 .borderGradient {
-  border-width: 0px 1px 0px 0px;
+  border-width: 0px 1px 0px 1px;
   border-style: solid; 
   border-image: linear-gradient(to bottom, #FE5F6E, #923CFF, #2B7CFF); 
   border-image-slice: 1;
@@ -21,6 +21,11 @@ body{
   border-style: solid; 
   border-image: linear-gradient(to right, #FE5F6E, #923CFF, #2B7CFF); 
   border-image-slice: 1;
+}
+
+.textSmall{
+  font-size: 13px ;
+  color: rgb(94, 94, 94)
 }
 
 @tailwind base;
