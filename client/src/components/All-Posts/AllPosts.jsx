@@ -4,10 +4,6 @@ import axios from 'axios'
 
 const AllPosts = () => {
 
-    useEffect(async()=>{
-        const response = axios.get(import.meta)
-    })
-
 return (
     <div className="grid justify-center grid-cols-2 pt-4 w-full h-screen gap-8 p-2 pb-4 overflow-y-auto scrollBarNone" 
     style={{
