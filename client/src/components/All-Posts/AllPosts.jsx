@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
 import nextIcon from '../../assets/next-icon.svg'
 import axios from 'axios'
+import { Link, useParams } from 'react-router-dom'
 
 const AllPosts = () => {
+
+    const id = useParams()
 
 return (
     <div className="grid justify-center grid-cols-2 pt-4 w-full h-screen gap-8 p-2 pb-4 overflow-y-auto scrollBarNone" 
@@ -23,7 +26,9 @@ return (
                 </div>
                 <div className="flex justify-between items-end px-1">  
                     <p className="text-sm textSmall px-1">Sak</p>
-                    <img className="h-12 hover:cursor-pointer flex self-end" src={nextIcon} />
+                    <Link to={`/postdetails/${id}`}>
+                        <img className="h-12 hover:cursor-pointer flex self-end" src={nextIcon} />
+                    </Link>
                 </div>
             </div>
     </div>
