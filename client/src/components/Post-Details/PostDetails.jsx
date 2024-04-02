@@ -1,7 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const PostDetails = () => {
+
   return (
     <div className="h-full pt-8 px-8">
         <div className="flex justify-between items-center pb-4">
