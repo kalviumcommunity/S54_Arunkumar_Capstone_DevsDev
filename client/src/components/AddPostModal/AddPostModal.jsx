@@ -79,7 +79,7 @@ const AddPostModal = () => {
             <p className="text-red-500 mt-1">Description must be at least 15 characters</p>
           )}
           {errors.description && errors.description.type === 'maxLength' && (
-            <p className="text-red-500 mt-1">Description must be less than 40 characters</p>
+            <p className="text-red-500 mt-1">Description must be less than 400 characters</p>
           )}
         </div>
 
