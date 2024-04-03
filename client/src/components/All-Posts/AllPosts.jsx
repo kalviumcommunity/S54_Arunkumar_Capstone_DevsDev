@@ -4,7 +4,6 @@ import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 
 const AllPosts = () => {
-
     
     const [datas,setData] = useState([])
     
@@ -25,7 +24,6 @@ const AllPosts = () => {
         fetchData()
 
     },[])
-
 
 return (
     <div className="grid justify-center grid-cols-2 pt-4 w-full h-screen gap-8 p-2 pb-4 overflow-y-auto" 
