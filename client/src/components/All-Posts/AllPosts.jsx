@@ -12,7 +12,7 @@ const AllPosts = () => {
         
         const fetchData = async() => {
             try {
-                console.log("get request working")
+                // console.log("get request working")
                 // console.log(`${import.meta.env.VITE_RENDER_LINK}/api/data`)
                 const response = await axios.get(`${import.meta.env.VITE_RENDER_LINK}/api/data`)
                 // console.log('data: ', response.data);
