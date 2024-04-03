@@ -23,6 +23,29 @@ const readData = async(req,res)=>{
 
 }
 
+// Reading single data 
+
+const readSingleData = async(req,res)=>{
+
+    const id = req.params.id
+
+    // console.log(id)
+
+    try {
+        const data = await DataModel.findOne({'_id':id})
+
+        if(!data){
+            return res.status(404).json({ message: 'Data not found' });
+        }
+        else{
+            res.status(200).json(data)
+        }
+
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+}
 //Creating Data
 const createData = async(req,res)=>{
     
@@ -59,5 +82,6 @@ module.exports = {
     readData,
     createData,
     updateData,
+    readSingleData,
 
 }
