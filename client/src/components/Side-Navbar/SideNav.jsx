@@ -2,7 +2,7 @@ import React from 'react'
 import homeIcon from '../../assets/home-icon.svg';
 import communityIcon from '../../assets/community-icon.svg';
 import pricingIcon from '../../assets/pricing-icon.svg';
-import savedIcon from '../../assets/saved-icon.svg';
+import saveIcon from '../../assets/save-icon.svg';
 // import helpIcon from '../../assets/help-icon.svg';
 // import faqsIcon from '../../assets/faqs-icon.svg';
 import { Link } from 'react-router-dom';
@@ -31,7 +31,7 @@ const SideNav = () => {
         },
         {
             name:"Saved",
-            icon:savedIcon,
+            icon:saveIcon,
             path:"/saved",
             key:4,
         }
@@ -55,13 +55,13 @@ const SideNav = () => {
         <div className="flex flex-col">
             <Link to='/help'>
                 <div className="flex justify-center items-center gap-8 px-6 py-4 " >
-                    <img src={savedIcon}/>
+                    <img src={saveIcon}/>
                     <span className="w-full">Help</span>
                 </div>
             </Link>
             <Link to='/faqs'>
                 <div className="flex justify-center items-center gap-8 px-6 py-4" >
-                    <img src={savedIcon}/>
+                    <img src={saveIcon}/>
                     <span className="w-full">FAQs</span>
                 </div>
             </Link>
