@@ -11,13 +11,28 @@ const dataSchema = new mongoose.Schema(
             trim : true
 
         },
+        pfp:{
+            type : String ,
+            required : true ,
+            trim : true
+        },
 
         community :{
             type : String ,
             required : true ,
             trim : true
         },
-
+        
+        title:{
+            required : true ,
+            type : String,
+            trim : true
+        },
+        description:{
+            required : true ,
+            type : String,
+            trim : true
+        },
         data:{
             required : true ,
             type : [String],
@@ -28,21 +43,23 @@ const dataSchema = new mongoose.Schema(
             required : true ,
             trim : true
         },
-
+        
         likes:{
             type : Number ,
             default : 0 ,
         },
-
+        
         comments:[
             {
                 commentText : {
                     type : String,
                     required:true,
+                    trim : true
                 },
                 replies:[{
                     type : String,
                     required:true,
+                    trim : true
                 }],
             }
         ]
