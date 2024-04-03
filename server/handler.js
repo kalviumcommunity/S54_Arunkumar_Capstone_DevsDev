@@ -6,7 +6,8 @@ const homeHandler = async(req,res)=>{
     try {
         res.send("Welcome to Dev'sDev")
     } catch (error) {
-        res.status(500).json(error)
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 
 }
@@ -18,34 +19,31 @@ const readData = async(req,res)=>{
         const readDatas = await DataModel.find()
         res.status(200).json(readDatas)
     } catch (error) {
-        res.status(500).json(error)
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 
 }
 
 // Reading single data 
 
-const readSingleData = async(req,res)=>{
-
-    const id = req.params.id
-
-    // console.log(id)
+const readSingleData = async (req, res) => {
+    const id = req.params.id;
 
     try {
-        const data = await DataModel.findOne({'_id':id})
+        const data = await DataModel.findOne({ '_id': id });
 
-        if(!data){
+        if (!data) {
             return res.status(404).json({ message: 'Data not found' });
+        } else {
+            res.status(200).json(data);
         }
-        else{
-            res.status(200).json(data)
-        }
-
     } catch (error) {
-        res.status(500).json(error)
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
+};
 
-}
 //Creating Data
 const createData = async(req,res)=>{
     
@@ -59,8 +57,8 @@ const createData = async(req,res)=>{
         
 
     } catch (error) {
-        console.log(error)
-        res.status(500).json(error)
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
     
 }
@@ -71,7 +69,8 @@ const updateData = async(req,res)=>{
     try {
         res.status(200).send("Data updated Successfully")
     } catch (error) {
-        res.status(500).json(error)
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 
 }
