@@ -1,5 +1,13 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useRef } from 'react'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import '../../index.css';
+
 import { Link, useParams } from 'react-router-dom'
 import likeIcon from '../../assets/like-icon.svg'
 import likedIcon from '../../assets/liked-icon.svg'
@@ -34,8 +42,6 @@ const PostDetails = () => {
         fetchData()
         
     },[])
-    
-    console.log(imageData)
 
   return (
     <div className="h-full pt-4 px-8">
@@ -48,9 +54,24 @@ const PostDetails = () => {
                 </Link>
                 <img src={moreIcon} className="cursor-pointer" alt='other'/>
         </div>
-        <div className="px-0 w-full h-96">
+        <div className=" w-full h-96 select-none cursor-pointer px-10">
+
+        <Swiper
+        spaceBetween={30}
+        pagination={{
+          clickable: true
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
                 
-            {imageData && imageData.map((res,i)=> <img key={i} className="w-full rounded-xl h-96" src={res} /> )}
+            {imageData && imageData.map((res,i)=> {
+                return (
+                    <SwiperSlide key={i} > <img  className="w-full rounded-xl h-96" src={res} />  </SwiperSlide>
+                )
+            })}
+
+        </Swiper>
 
         </div>
         <div className="flex justify-between items-center w-full py-4">
@@ -70,3 +91,5 @@ const PostDetails = () => {
 }
 
 export default PostDetails
+
+// <SwiperSlide>Slide 2</SwiperSlide>
