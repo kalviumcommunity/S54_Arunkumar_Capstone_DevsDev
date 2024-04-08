@@ -1,17 +1,73 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm ,Controller  } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { useDropzone } from 'react-dropzone';
 import { addToCloudinary } from '../addToCloudinary';
 
+import {useClerk} from '@clerk/clerk-react'
+import axios from 'axios';
+
 const AddPostModal = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+  const { user } = useClerk();
+  // Check if user is not undefined before accessing its properties
+  const username = user ? user.username : '';
+  const pfp = user ? user.imageUrl : '';
+
+  // console.log('fullname: ', fullname);
+
+  const { register, handleSubmit, formState: { errors }, reset ,control} = useForm();
   const [images, setImages] = useState([]); 
   // const [cloudinaryImageData, setCloudinaryImageData] = useState([]);
   const [hoveredImageIndex, setHoveredImageIndex] = useState(null); 
   const [upload, setUpload] = useState(false);
+
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+    const year = String(currentDate.getFullYear()).slice(-2); // Extract last two digits of the year
+  
+    return `${day}/${month}/${year}`;
+  };
+
+  const date = getCurrentDate()
+
+  const communities = [
+    { value: 'amazon', label: 'Amazon' },
+    { value: 'apple', label: 'Apple' },
+    { value: 'appleMusic', label: 'Apple Music' },
+    { value: 'behance', label: 'Behance' },
+    { value: 'discord', label: 'Discord' },
+    { value: 'facebook', label: 'Facebook' },
+    { value: 'figma', label: 'Figma' },
+    { value: 'github', label: 'GitHub' },
+    { value: 'google', label: 'Google' },
+    { value: 'instagram', label: 'Instagram' },
+    { value: 'linkedin', label: 'LinkedIn' },
+    { value: 'microsoft', label: 'Microsoft' },
+    { value: 'netflix', label: 'Netflix' },
+    { value: 'other', label: 'Other' },
+    { value: 'picasa', label: 'Picasa' },
+    { value: 'pinterest', label: 'Pinterest' },
+    { value: 'reddit', label: 'Reddit' },
+    { value: 'skype', label: 'Skype' },
+    { value: 'snapchat', label: 'Snapchat' },
+    { value: 'spotify', label: 'Spotify' },
+    { value: 'steam', label: 'Steam' },
+    { value: 'tiktok', label: 'TikTok' },
+    { value: 'twitch', label: 'Twitch' },
+    { value: 'twitter', label: 'Twitter' },
+    { value: 'vimeo', label: 'Vimeo' },
+    { value: 'vine', label: 'Vine' },
+    { value: 'whatsapp', label: 'WhatsApp' },
+    { value: 'wordpress', label: 'WordPress' },   
+    { value: 'youtube', label: 'YouTube' },
+    { value: 'other', label: 'Other' },
+  ];
+  
 
   const handleMouseEnter = (index) => {
     setHoveredImageIndex(index);
@@ -44,21 +100,36 @@ const AddPostModal = () => {
       toast.error('Please upload max 10 image.');
       return;
     }
-    
+
     setUpload(true); // Set upload state to true while uploading
 
-    const imageData = await addToCloudinary(images);
-    console.log('imageData: ', imageData);
+    const data = await addToCloudinary(images);
+    // console.log('imageData: ', data);
   
-    formData.imageData = imageData;
+    formData.data = data;
+    formData.username = username;
+    formData.pfp = pfp;
+    formData.date = date;
 
     console.log('Form data with cloudinaryImageData:', formData);
 
-    setUpload(false); // Set upload state to false after uploading
-    
-    toast.success('Form submitted successfully!');
-    reset(); // This will reset the form state
-    setImages([]);
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_RENDER_LINK}/api/data/create`, formData);
+      console.log('Response:', response.data);
+      
+      toast.success(response.data.message);
+      
+      setUpload(false); // Set upload state to false after uploading
+      
+      reset(); // This will reset the form state
+      setImages([]);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      
+      toast.error(error);
+    }
+
   };
   
   
@@ -88,6 +159,31 @@ const AddPostModal = () => {
               <p className="text-red-500 mt-1">Title must be less than 30 characters</p>
             )}
           </div>
+
+          <div className="mb-4">
+  <Controller
+        name="community"
+        control={control}
+        defaultValue=""
+        rules={{ required: 'Please select a community' }} // Add a validation rule for required selection
+        render={({ field }) => (
+          <select
+            {...field}
+            className={`w-full rounded px-4 py-2 focus:outline-none bg-[#181818] focus:border-blue-200 text-white ${errors.community ? 'border-red-500' : ''}`}
+          >
+            <option value="" disabled hidden>Select a community</option>
+            {/* Render other options */}
+            {communities.map(community => (
+              <option className='py-1' key={community.value} value={community.value}>{community.label}</option>
+            ))}
+          </select>
+        )}
+      />
+      {errors.community && <p className="text-red-500 mt-1">{errors.community.message}</p>}
+    </div>
+
+
+
 
           <div className="mb-4">
             <textarea
