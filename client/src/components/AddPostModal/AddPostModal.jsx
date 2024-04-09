@@ -11,7 +11,8 @@ import axios from "axios";
 
 const AddPostModal = () => {
   const { user } = useClerk();
-  const username = user ? user.username : "";
+  // console.log('user: ', user);
+  const username = user ? user.fullName : "";
   const pfp = user ? user.imageUrl : "";
 
 
@@ -144,18 +145,17 @@ const AddPostModal = () => {
 
       toast.success(response.data.message);
 
+      setUpload(false);
+      
+      reset();
+      setImages([]);
       setTimeout(() => {
         window.location.href = "/";
       }, 1000);
-
-      setUpload(false); // Set upload state to false after uploading
-
-      reset(); // This will reset the form state
-      setImages([]);
+      
     } catch (error) {
+      setUpload(false);
       console.error("Error:", error);
-
-      toast.error(error);
     }
   };
 

@@ -9,8 +9,7 @@ const addToCloudinary = async (images) => {
       formData.append('file', image);
       formData.append('upload_preset', 'user_image_datas');
 
-      const response = await axios.post(
-        'https://api.cloudinary.com/v1_1/dj38thh6g/image/upload',
+      const response = await axios.post(import.meta.env.VITE_CLOUDINARY_LINK,
         formData,
         {
           headers: {
