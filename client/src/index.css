@@ -11,8 +11,11 @@
 
 body{
   font-family: helvetica;
+  font-size: 14px;
+  letter-spacing: 0.5px;
   background-color: #181818;
   color: white;
+  font-weight: lighter;
 }
 
 .borderGradient {

@@ -53,7 +53,7 @@ const createData = async(req,res)=>{
 
         await DataModel.create(InputData)
 
-        res.status(201).json({data : InputData , message : "data added successfully"})
+        res.status(201).json({data : InputData , message : "Post added successfully"})
         
 
     } catch (error) {
@@ -75,6 +75,44 @@ const updateData = async(req,res)=>{
 
 }
 
+// Updating Data  
+const updatePfp = async (req, res) => {
+    const username = req.params.username;
+    // console.log('username: ', username);
+    try {
+        const { pfp } = req.body;
+        // console.log('pfp: ', pfp);
+
+        // Ensure that both pfp and username are provided
+        if (!pfp || !username) {
+            return res.status(400).json({ message: "Both pfp and username are required." });
+        }
+
+        // Construct the update object to apply partial updates
+        const updateObject = {};
+        if (pfp) {
+            updateObject.pfp = pfp;
+        }
+
+        // Update the documents matching the username
+        const response = await DataModel.updateMany(
+            { username: username },
+            { $set: updateObject } // Apply partial updates
+        );
+
+        if (response) {
+            return res.status(200).json({ message: "Profile picture updated successfully" });
+        } else {
+            return res.status(404).send("No data found for the provided username");
+        }
+    } catch (error) {
+        console.error('Error occurred:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+
+
 module.exports = {
 
     homeHandler,
@@ -82,5 +120,6 @@ module.exports = {
     createData,
     updateData,
     readSingleData,
+    updatePfp
 
 }
