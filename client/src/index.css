@@ -43,29 +43,25 @@ body{
   color: rgb(94, 94, 94)
 }
 
-/* .swiper {
-  width: 100%;
-  height: 100%;
+
+.cl-userButtonPopoverFooter{
+  display: none;
 }
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
+.cl-internal-b3fm6y{
+  display: none;
 
+}
 
+.cl-rootBox{
   display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-/* 
-.swiper-slide img {
-  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
+  justify-content: center
+}
 
+.cl-footer{
+  display: none
+}
 
 @tailwind base;
 @tailwind components;

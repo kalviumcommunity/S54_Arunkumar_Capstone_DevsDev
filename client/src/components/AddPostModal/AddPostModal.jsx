@@ -11,11 +11,9 @@ import axios from "axios";
 
 const AddPostModal = () => {
   const { user } = useClerk();
-  // Check if user is not undefined before accessing its properties
   const username = user ? user.username : "";
   const pfp = user ? user.imageUrl : "";
 
-  // console.log('fullname: ', fullname);
 
   const {
     register,
@@ -25,7 +23,7 @@ const AddPostModal = () => {
     control,
   } = useForm();
   const [images, setImages] = useState([]);
-  // const [cloudinaryImageData, setCloudinaryImageData] = useState([]);
+
   const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
   const [upload, setUpload] = useState(false);
 
@@ -142,7 +140,7 @@ const AddPostModal = () => {
         `${import.meta.env.VITE_RENDER_LINK}/api/data/create`,
         formData
       );
-      // console.log('Response:', response.data);
+      console.log('Response:', response.data);
 
       toast.success(response.data.message);
 

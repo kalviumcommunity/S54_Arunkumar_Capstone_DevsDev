@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
-
 const Navbar = () => {
   
   return (
@@ -22,20 +21,29 @@ const Navbar = () => {
             placeholder="Search"
             style={{ caretColor: "white" }}
           />
-        </div>
-    
-        <header>
-            <SignedOut>
-              <SignInButton>
-                  <button className="px-8 py-2 borderGradientButton">
-                    <span className="bg-gradient-to-r from-[#923CFF] to-[#FE5F6E] text-transparent bg-clip-text">Register</span>
-                  </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-        </header>
+      </div>
+
+      <header>
+      <SignedOut>
+            <div>
+              <Link to='/signup'>
+                <button className="px-4 py-2 borderGradientButton">
+                  <span className="bg-gradient-to-r from-[#923CFF] to-[#FE5F6E] text-transparent bg-clip-text">Signup</span>
+                </button>
+              </Link>
+              <Link to='/signin'>
+                <button className="px-4 py-2 borderGradientButton">
+                  <span className="bg-gradient-to-r from-[#923CFF] to-[#FE5F6E] text-transparent bg-clip-text">Login</span>
+                </button>
+              </Link>
+            </div>
+          </SignedOut>
+        <SignedIn>
+          <UserButton afterSignOutUrl='/'/>
+        </SignedIn>
+      </header>
+
+      
 
     </nav>
   );
