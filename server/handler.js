@@ -77,23 +77,31 @@ const updateData = async(req,res)=>{
 
 // Updating Data  
 const updatePfp = async (req, res) => {
+    const username = req.params.username;
+    // console.log('username: ', username);
     try {
-        const { pfp , username} = req.body;
+        const { pfp } = req.body;
+        // console.log('pfp: ', pfp);
 
         // Ensure that both pfp and username are provided
         if (!pfp || !username) {
             return res.status(400).json({ message: "Both pfp and username are required." });
         }
 
+        // Construct the update object to apply partial updates
+        const updateObject = {};
+        if (pfp) {
+            updateObject.pfp = pfp;
+        }
+
         // Update the documents matching the username
         const response = await DataModel.updateMany(
             { username: username },
-            { $set: { pfp: pfp } } // Use $set to update specific fields
+            { $set: updateObject } // Apply partial updates
         );
 
-        // Check if any documents were updated
-        if (response.nModified > 0) {
-            return res.status(200).send("Data updated Successfully");
+        if (response) {
+            return res.status(200).json({ message: "Profile picture updated successfully" });
         } else {
             return res.status(404).send("No data found for the provided username");
         }
@@ -102,6 +110,8 @@ const updatePfp = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+
 
 module.exports = {
 

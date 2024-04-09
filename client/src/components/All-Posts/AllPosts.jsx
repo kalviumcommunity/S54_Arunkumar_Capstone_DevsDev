@@ -33,12 +33,11 @@ return (
         overflow: '-moz-scrollbars-none'
     }}>
 
-    {datas && datas.map((data,i)=>{
-        return(
-
+    {datas && datas.slice().reverse().map((data, i) => {
+        return (
             <div key={i} className="w-96 bg-[#1E1E1E] rounded-xl h-80 p-4 hover:cursor-pointer">
                 <div className="w-full bg-[#181818] rounded-md h-48">
-                    <img className="w-full h-full rounded-md" src={data.data[0]}/>
+                    <img className="w-full h-full rounded-md" src={data.data[0]} alt="Post" />
                 </div>
                 <div className="flex flex-col justify-between h-24">
                     <div className="flex justify-between items-end px-1">
@@ -48,13 +47,12 @@ return (
                     <div className="flex justify-between items-end px-1">  
                         <p className="text-sm textSmall px-1">{data.username}</p>
                         <Link to={`/postdetails/${data._id}`}>
-                            <img className="h-12 hover:cursor-pointer flex self-end" src={nextIcon} />
+                            <img className="h-12 hover:cursor-pointer flex self-end" src={nextIcon} alt="Next" />
                         </Link>
                     </div>
                 </div>
             </div>
-
-        )
+        );
     })}
 
     </div>

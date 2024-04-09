@@ -9,14 +9,19 @@ const dataSchema = new mongoose.Schema(
             type : String ,
             required : true ,
             trim : true
-
         },
-        pfp:{
-            type : String ,
-            required : true ,
-            trim : true
+        pfp: {
+            type: String,
+            required: true,
+            trim: true,
+            validate: {
+                validator: function(v) {
+                    // Regular expression to validate URL format
+                    return /^(ftp|http|https):\/\/[^ "]+$/.test(v);
+                },
+                message: props => `${props.value} is not a valid URL!`
+            }
         },
-
         community :{
             type : String ,
             required : true ,
@@ -28,7 +33,7 @@ const dataSchema = new mongoose.Schema(
             type : String,
             trim : true
         },
-        
+
         description:{
             required : true ,
             type : String,

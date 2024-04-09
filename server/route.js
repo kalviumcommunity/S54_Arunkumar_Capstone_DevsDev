@@ -21,7 +21,7 @@ apiRouter.post( '/data/create', createData )
 apiRouter.put( '/data/update/:id',updateData )
 
 // Put request for Updating data
-apiRouter.put( '/data/update/pfp',updatePfp )
+apiRouter.patch( '/data/update/pfp/:username',updatePfp )
 
 module.exports = {
     generalRouter,
