@@ -1,4 +1,5 @@
-const { DataModel } = require("./schema/dataSchema")
+const { DataModel } = require("./schema/dataSchema");
+const { savedModel, userModel } = require("./schema/userData");
 
 // homeHandler (get)
 const homeHandler = async(req,res)=>{
@@ -25,8 +26,23 @@ const readData = async(req,res)=>{
 
 }
 
-// Reading single data 
+// Saving Data
+const savedData = async(req,res)=>{
 
+    const userId = req.params.userId
+
+    try {
+        const savedData = await userModel.find({"userId":userId})
+        res.status(200).json(savedData)
+
+    } catch (error) {
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+}
+
+// Reading single data 
 const readSingleData = async (req, res) => {
     const id = req.params.id;
 
@@ -63,43 +79,90 @@ const createData = async(req,res)=>{
     
 }
 
+// Creating User 
+const createUser = async (req, res) => {
+    try {
+        const inputData = req.body;
+        const { userId } = inputData;
+
+        const existingUser = await userModel.findOne({ 'userId': userId });
+        if (existingUser) {
+            return res.status(200).json({ data: inputData, message: "User already exists" });
+        }
+
+        await userModel.create(inputData);
+
+        return res.status(201).json({ data: inputData, message: "User added successfully" });
+    } catch (error) {
+        console.error('Error occurred:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+//Saving Data
+const saveData = async (req, res) => {
+    try {
+        const inputData = req.body;
+        const { objId , userId} = inputData;
+
+        const data = await DataModel.findOne({ '_id': objId });
+        if (data) {
+
+            await userModel.updateOne(
+                { 'userId': userId },   
+                { $push: { likedproducts: data } }
+            );
+
+            return res.status(200).json({ data: inputData, message: " Post saved successfully" });
+        }
+
+        await userModel.create(inputData);
+
+        return res.status(201).json({ data: inputData, message: "User added successfully" });
+    } catch (error) {
+        console.error('Error occurred:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 // Updating Data  
 const updateData = async(req,res)=>{
-
+    
     try {
         res.status(200).send("Data updated Successfully")
     } catch (error) {
         console.error('Error occurred:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
-
+    
 }
 
-// Updating Data  
+// Updating pfp  
 const updatePfp = async (req, res) => {
-    const username = req.params.username;
-    // console.log('username: ', username);
+    const id = req.params.id;
+    
     try {
         const { pfp } = req.body;
         // console.log('pfp: ', pfp);
-
+        
         // Ensure that both pfp and username are provided
-        if (!pfp || !username) {
+        if (!pfp || !id) {
             return res.status(400).json({ message: "Both pfp and username are required." });
         }
-
+        
         // Construct the update object to apply partial updates
         const updateObject = {};
         if (pfp) {
             updateObject.pfp = pfp;
         }
-
+        
         // Update the documents matching the username
         const response = await DataModel.updateMany(
-            { username: username },
-            { $set: updateObject } // Apply partial updates
+            { userId: id },
+            { $set: updateObject } 
         );
-
+        
         if (response) {
             return res.status(200).json({ message: "Profile picture updated successfully" });
         } else {
@@ -112,14 +175,44 @@ const updatePfp = async (req, res) => {
 }
 
 
+const deleteData = async (req, res) => {
+    const inputData = req.body;
+
+    try {
+        const { userId, objId } = inputData;
+
+        const data = await DataModel.findOne({ '_id': objId });
+
+        if (!data) {
+            return res.status(404).json({ message: "Data not found" });
+        }
+
+        await userModel.updateOne(
+            { 'userId': userId },
+            { $pull: { likedproducts: { _id: objId } } } // Match _id field of the object to remove
+        );
+
+        return res.status(200).json({ data: inputData, message: "Post removed successfully" });
+
+    } catch (error) {
+        console.error('Error occurred:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
 
 module.exports = {
-
+    
     homeHandler,
     readData,
     createData,
     updateData,
     readSingleData,
-    updatePfp
+    updatePfp,
+    saveData,
+    createUser,
+    deleteData,
+    savedData
 
 }

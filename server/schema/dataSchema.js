@@ -5,6 +5,11 @@ const mongoose = require('mongoose')
 const dataSchema = new mongoose.Schema(
     {
 
+        userId:{
+            type : String ,
+            required : true ,
+            trim : true
+        },
         username:{
             type : String ,
             required : true ,

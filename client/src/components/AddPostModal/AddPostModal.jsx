@@ -11,8 +11,10 @@ import axios from "axios";
 
 const AddPostModal = () => {
   const { user } = useClerk();
-  // console.log('user: ', user);
+  console.log('user: ', user);
+  const userId = user ? user.id : "";
   const username = user ? user.fullName : "";
+  console.log('userId: ', userId);  
   const pfp = user ? user.imageUrl : "";
 
 
@@ -130,6 +132,7 @@ const AddPostModal = () => {
     // console.log('imageData: ', data);
 
     formData.data = data;
+    formData.userId = userId;
     formData.username = username;
     formData.pfp = pfp;
     formData.date = date;
