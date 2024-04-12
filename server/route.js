@@ -3,13 +3,16 @@ const generalRouter = require('express').Router()
 const apiRouter = require('express').Router()
 
 // importing handlers
-const { homeHandler, readData, createData, updateData, readSingleData, updatePfp, saveData, createUser, deleteData } = require('./handler')
+const { homeHandler, readData, createData, updateData, readSingleData, updatePfp, saveData, createUser, deleteData, savedData } = require('./handler')
 
 // Get req in home
 generalRouter.get('/',homeHandler)
 
 // Get request for API 
 apiRouter.get( '/data', readData )
+
+// Get request for saved page 
+apiRouter.get( '/data/saved/:userId', savedData )
 
 // Get request for single data 
 apiRouter.get( '/data/postdetails/:id', readSingleData )

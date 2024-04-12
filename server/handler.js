@@ -26,8 +26,23 @@ const readData = async(req,res)=>{
 
 }
 
-// Reading single data 
+// Saving Data
+const savedData = async(req,res)=>{
 
+    const userId = req.params.userId
+
+    try {
+        const savedData = await userModel.find({"userId":userId})
+        res.status(200).json(savedData)
+
+    } catch (error) {
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+
+}
+
+// Reading single data 
 const readSingleData = async (req, res) => {
     const id = req.params.id;
 
@@ -64,6 +79,7 @@ const createData = async(req,res)=>{
     
 }
 
+// Creating User 
 const createUser = async (req, res) => {
     try {
         const inputData = req.body;
@@ -88,13 +104,13 @@ const createUser = async (req, res) => {
 const saveData = async (req, res) => {
     try {
         const inputData = req.body;
-        const { userId } = inputData;
+        const { objId , userId} = inputData;
 
-        const data = await DataModel.findOne({ 'userId': userId });
+        const data = await DataModel.findOne({ '_id': objId });
         if (data) {
 
             await userModel.updateOne(
-                { 'userId': userId },
+                { 'userId': userId },   
                 { $push: { likedproducts: data } }
             );
 
@@ -159,29 +175,31 @@ const updatePfp = async (req, res) => {
 }
 
 
-// Deleting Data 
 const deleteData = async (req, res) => {
+    const inputData = req.body;
+
     try {
-        const inputData = req.body;
-        const { userId } = inputData;
-        console.log('userId: ', userId);
+        const { userId, objId } = inputData;
 
-        const data = await DataModel.findOne({ 'userId': userId });
+        const data = await DataModel.findOne({ '_id': objId });
 
-        if (data) {
-            await userModel.updateOne(
-                { 'userId': userId },
-                { $pull: { likedproducts: data } }
-            );
-
-            return res.status(200).json({ data: inputData, message: " Post removed successfully" });
+        if (!data) {
+            return res.status(404).json({ message: "Data not found" });
         }
+
+        await userModel.updateOne(
+            { 'userId': userId },
+            { $pull: { likedproducts: { _id: objId } } } // Match _id field of the object to remove
+        );
+
+        return res.status(200).json({ data: inputData, message: "Post removed successfully" });
 
     } catch (error) {
         console.error('Error occurred:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 
 
 module.exports = {
@@ -195,5 +213,6 @@ module.exports = {
     saveData,
     createUser,
     deleteData,
+    savedData
 
 }

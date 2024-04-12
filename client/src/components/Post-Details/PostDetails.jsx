@@ -101,7 +101,7 @@ const PostDetails = () => {
         <img
           className="cursor-pointer"
           onClick={() =>{
-            bookmark ? saveData(datas._id,userId) : deleteData(datas._id,userId)
+            userId && bookmark ? saveData(datas._id,userId) : deleteData(datas._id,userId)
             setBookmark(!bookmark)
             }
           }

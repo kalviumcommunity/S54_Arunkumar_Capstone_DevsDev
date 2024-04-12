@@ -2,20 +2,17 @@ import axios from 'axios'
 import {toast} from 'react-toastify'
 
 const saveData = async(objId,userId) =>{
-  console.log('userId: ', userId);
 
-    const objData =  new Object();
-    objData.userId = userId
-    objData.objId = objId
+
+    const saveObjData =  new Object();
+    saveObjData.userId = userId
+    saveObjData.objId = objId
     
     try {
         const response = await axios.post(
           `${import.meta.env.VITE_RENDER_LINK}/api/data/save`,
-          objData
+          saveObjData
         );
-        console.log('Response:', response.data);
-  
-        toast.success(response.data.message);
 
        return
         
@@ -25,34 +22,23 @@ const saveData = async(objId,userId) =>{
       }
 }
 
-const deleteData = async(objId,userId) =>{
-  console.log('userId: ', userId);
+const deleteData = async (objId, userId) => {
+  const delObjData = {
+      userId: userId,
+      objId: objId
+  };
 
-  
-  const objData =  new Object();
-  objData.userId = userId
-  objData.objId = objId
-  
-  console.log('objData: ', objData);
-  
   try {
-    const response = await axios.delete(
-      `${import.meta.env.VITE_RENDER_LINK}/api/data/delete`,
-      objData
-    );
-    console.log('hello')
-        console.log('Response:', response.data);
-  
-        toast.success(response.data.message);
+      const response = await axios.delete(
+          `${import.meta.env.VITE_RENDER_LINK}/api/data/delete`,
+          { data: delObjData }
+      );
 
-        // setTimeout(() => {
-        //   window.location.href = "/";
-        // }, 1000);
-        
-      } catch (error) {
 
-        console.error("Error:", error);
-      }
-}
+  } catch (error) {
+      console.error("Error:", error);
+  }
+};
+
 
 export {saveData , deleteData} ;
