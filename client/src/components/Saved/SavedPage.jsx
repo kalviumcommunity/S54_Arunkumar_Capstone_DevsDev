@@ -13,11 +13,10 @@ const SavedPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Only fetch data if user is available
+
         if (id) {
           const response = await axios.get(`${import.meta.env.VITE_RENDER_LINK}/api/data/saved/${id}`);
           const { likedproducts } = response && response.data[0];
-          console.log('likedproducts: ', likedproducts);
           setData(likedproducts ? likedproducts : []);
         }
       } catch (err) {
@@ -26,7 +25,7 @@ const SavedPage = () => {
     };
 
     fetchData();
-  }, [id]); // Include id in dependency array
+  }, [id]);
 
   return (
     <>
