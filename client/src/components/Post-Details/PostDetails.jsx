@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import "../../index.css";
 
-import {ToastContainer} from 'react-toastify'
+import { ToastContainer, toast } from "react-toastify";
 
 import { Link, useParams } from "react-router-dom";
 import likeIcon from "../../assets/like-icon.svg";
@@ -18,30 +18,22 @@ import commentIcon from "../../assets/comment-icon.svg";
 import saveIcon from "../../assets/save-icon.svg";
 import savedIcon from "../../assets/saved-icon.svg";
 import moreIcon from "../../assets/more-icon.svg";
-import { deleteData, saveData } from "../saveData";
 // import likeIcon from '../../assets/like-icon.svg'
 
-import {useClerk} from '@clerk/clerk-react'
+import { useClerk } from "@clerk/clerk-react";
+import { saveData , deleteData } from "../saveData";
 
 const PostDetails = () => {
   const [datas, setData] = useState([]);
-
   const [bookmark, setBookmark] = useState(true);
-
-  // console.log('datas: ', datas);
   const [imageData, setImageData] = useState([]);
   const { id } = useParams();
-  // console.log(id)
-
-  const {user} = useClerk();
-  const {id : userId} = user ? user : ''
-//   console.log('userId: ', userId);
+  const { user } = useClerk();
+  const { id: userId } = user ? user : "";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log("get request working")
-        // console.log(`${import.meta.env.VITE_RENDER_LINK}/api/data`)
         const response = await axios.get(
           `${import.meta.env.VITE_RENDER_LINK}/api/data/postdetails/${id}`
         );
@@ -54,6 +46,33 @@ const PostDetails = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+
+    const likedDatas = JSON.parse(localStorage.getItem("likedDatas")) || [];
+
+    const isSaved = likedDatas.includes(datas._id);
+
+    setBookmark(isSaved);
+  }, [datas._id]);
+
+  const handleSaveToggle = () => {
+    if (!user) {
+      toast.error('Login to save post');
+      return;
+    }
+    
+    if (!bookmark) {
+      saveData(datas._id, userId);
+    } else {
+      const confirmDelete = window.confirm('Are you sure you want to remove the saved post?');
+      if (!confirmDelete) return; // If user cancels, exit function
+      
+      deleteData(datas._id, userId);
+    }
+    
+    setBookmark(!bookmark);
+};
 
   return (
     <div className="h-full pt-4 px-8">
@@ -97,15 +116,10 @@ const PostDetails = () => {
           <img className="cursor-pointer" src={commentIcon} alt="comments" />
           <img className="cursor-pointer" src={shareIcon} alt="share" />
         </div>
-        {/* <img className="cursor-pointer" src={saveIcon} alt='save'/> */}
         <img
           className="cursor-pointer"
-          onClick={() =>{
-            userId && bookmark ? saveData(datas._id,userId) : deleteData(datas._id,userId)
-            setBookmark(!bookmark)
-            }
-          }
-          src={ bookmark ? saveIcon : savedIcon }
+          onClick={handleSaveToggle}
+          src={bookmark ? savedIcon : saveIcon}
           alt="save"
         />
       </div>
@@ -119,5 +133,3 @@ const PostDetails = () => {
 };
 
 export default PostDetails;
-
-// <SwiperSlide>Slide 2</SwiperSlide>

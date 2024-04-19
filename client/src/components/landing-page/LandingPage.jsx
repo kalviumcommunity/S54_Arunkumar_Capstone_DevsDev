@@ -33,6 +33,7 @@ const LandingPage = () => {
     const [pfp, setPfp] = useState(localStorage.getItem('pfp') || '');
 
     useEffect(() => {
+
       const userLogin = async (id) => {
           if (user) {
               const response = await postUser(id);

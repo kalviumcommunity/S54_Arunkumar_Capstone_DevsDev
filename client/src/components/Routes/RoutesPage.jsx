@@ -9,6 +9,7 @@ import AddPostModal from '../AddPostModal/AddPostModal';
 import PostDetails from '../Post-Details/PostDetails';
 import SignInComp from '../sign-in/SignIn';
 import SignUpComp from '../Sign-Up/SignUp';
+import Faqs from '../Faqs/Faqs';
 
 const RoutesPage = () => {
   return (
@@ -21,6 +22,7 @@ const RoutesPage = () => {
       <Route path='/postdetails/:id' element={<PostDetails />} />
       <Route path='/signin' element={<SignInComp />} />
       <Route path='/signup' element={<SignUpComp />} />
+      <Route path='/faqs' element={<Faqs />} />
     </Routes>
   );
 }

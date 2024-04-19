@@ -274,7 +274,7 @@ const AddPostModal = () => {
                     <img
                       src={URL.createObjectURL(file)}
                       alt="Dropped"
-                      className="max-w-full max-h-24"
+                      className="w-44 max-w-full  max-h-24"
                     />
                     {hoveredImageIndex === index && (
                       <button
