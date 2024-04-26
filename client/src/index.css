@@ -16,6 +16,7 @@ body{
   background-color: #181818;
   color: white;
   font-weight: lighter;
+  overflow: hidden;
 }
 
 .borderGradient {
@@ -63,6 +64,55 @@ body{
   display: none
 }
 
+
+
+/* .cl-socialButtonsIconButton{
+  background-color: #ffffff;
+} */
+/* 
+.cl-socialButtonsIconButton:hover{
+  background-color: #717171;
+} */
+
+/* .cl-card{
+  background-color: #1E1E1E;
+  color: white
+} */
+
+/* .cl-headerTitle{
+  color: white
+} */
+/* .cl-headerSubtitle{
+  color: white
+} */
+/* .cl-formFieldHintText{
+  color: rgb(110, 110, 110)
+} */
+/* .cl-dividerText{
+  color: white
+} */
+/* .cl-dividerLine{
+  background-color: white
+}
+.cl-formFieldLabel{
+  color: white
+} */
+/* .cl-userButton-popover{
+  background-color: #1e1e1e ;
+} */
+/* .cl-internal-1ptfnbv{
+  color: white
+}
+
+.cl-internal-17bz5n6{
+  color: white
+}
+.cl-internal-1yejcov{
+  color: white;
+} */
+/* .cl-internal-yrq74:hover , .cl-internal-yrq74:hover{
+  background-color: #181818
+} */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

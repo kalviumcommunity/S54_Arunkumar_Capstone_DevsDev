@@ -14,10 +14,8 @@ const Content = () => {
 
         </div>
 
-        <div className="col-span-4 py-14 px-20 overflow-y-auto borderGradient">
-
-            <RoutesPage />
-
+        <div className="col-span-4 h-screen py-14 px-20 overflow-hidden borderGradient">
+          <RoutesPage />
         </div>
 
         <div className="col-span-1 h-screen  px-6 py-14">
