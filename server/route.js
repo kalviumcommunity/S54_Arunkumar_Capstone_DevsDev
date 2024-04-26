@@ -3,7 +3,7 @@ const generalRouter = require('express').Router()
 const apiRouter = require('express').Router()
 
 // importing handlers
-const { homeHandler, readData, createData, updateData, readSingleData, updatePfp, saveData, createUser, deleteData, savedData } = require('./handler')
+const { homeHandler, readData, createData , readSingleData, updatePfp, saveData, createUser, deleteData, savedData, deletePost } = require('./handler')
 
 // Get req in home
 generalRouter.get('/',homeHandler)
@@ -27,13 +27,15 @@ apiRouter.post( '/data/create/user', createUser )
 apiRouter.post( '/data/save', saveData )
 
 // Put request for Updating data
-apiRouter.put( '/data/update/:id',updateData )
+// apiRouter.put( '/data/update/:id',updateData )
 
 // Put request for Updating data
 apiRouter.patch( '/data/update/pfp/:id',updatePfp )
 
 // Delete request for deleting data
 apiRouter.delete( '/data/delete', deleteData )
+
+apiRouter.delete( '/data/deletePost/:id', deletePost )
 
 module.exports = {
     generalRouter,

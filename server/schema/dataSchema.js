@@ -4,7 +4,6 @@ const mongoose = require('mongoose')
 // Schema for data input from user 
 const dataSchema = new mongoose.Schema(
     {
-
         userId:{
             type : String ,
             required : true ,

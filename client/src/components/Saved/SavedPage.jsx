@@ -16,7 +16,7 @@ const SavedPage = () => {
 
         if (id) {
           const response = await axios.get(`${import.meta.env.VITE_RENDER_LINK}/api/data/saved/${id}`);
-          const { likedproducts } = response && response.data[0];
+          const { likedproducts } = response && response.data;
           setData(likedproducts ? likedproducts : []);
         }
       } catch (err) {

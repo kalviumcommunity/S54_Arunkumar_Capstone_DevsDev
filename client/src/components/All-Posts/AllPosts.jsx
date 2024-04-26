@@ -34,10 +34,10 @@ const AllPosts = () => {
           const response = await axios.get(
             `${import.meta.env.VITE_RENDER_LINK}/api/data/saved/${id}`
           );
-          const { likedproducts } = response.data[0];
+          const { likedproducts } = response.data;
           
           // Extract objId from each object in likedproducts array
-          const objIds = likedproducts.map(product => product._id);
+          const objIds = likedproducts && likedproducts.map(product => product._id);
   
           setLikedData(objIds ? objIds : []);
 
