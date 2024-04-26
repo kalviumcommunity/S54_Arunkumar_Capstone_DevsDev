@@ -1,0 +1,18 @@
+meta {
+  name: Delete Post from Saved Page
+  type: http
+  seq: 9
+}
+
+delete {
+  url: http://localhost:3050/api/data/delete
+  body: json
+  auth: none
+}
+
+body:json {
+  { 
+    "userId": "user_2erbqR37Z8TWWh57Xl6UBhC19y5",
+    "objId" : "662b98c891d63ec9fa52fb26"
+  }
+}

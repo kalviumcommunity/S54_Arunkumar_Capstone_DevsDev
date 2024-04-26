@@ -157,10 +157,15 @@ const updatePfp = async (req, res) => {
             updateObject.pfp = pfp;
         }
         
-        // Update the documents matching the username
+        // Update the documents matching the username only if pfp has changed
+        if (Object.keys(updateObject).length === 0) {
+            // No change in pfp, so exit the function without sending any response
+            return;
+        }
+        
         const response = await DataModel.updateMany(
             { userId: id },
-            { $set: updateObject } 
+            { $set: updateObject }
         );
         
         if (response) {
@@ -173,6 +178,7 @@ const updatePfp = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error' });
     }
 }
+
 
 
 const deleteData = async (req, res) => {

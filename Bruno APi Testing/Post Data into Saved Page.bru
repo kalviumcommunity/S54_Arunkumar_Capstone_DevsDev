@@ -1,0 +1,18 @@
+meta {
+  name: Post Data into Saved Page
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3050/api/data/save
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "objId":"662b98c891d63ec9fa52fb26",
+    "userId":"user_2erbqR37Z8TWWh57Xl6UBhC19y5"
+  }
+}
