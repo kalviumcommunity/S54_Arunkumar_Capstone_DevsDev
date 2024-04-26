@@ -160,7 +160,7 @@ const updatePfp = async (req, res) => {
         // Update the documents matching the username
         const response = await DataModel.updateMany(
             { userId: id },
-            { $set: updateObject } 
+            { $set: updateObject }
         );
         
         if (response) {
