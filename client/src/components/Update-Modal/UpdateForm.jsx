@@ -323,7 +323,7 @@ const UpdateForm = () => {
               upload ? "bg-gray" : "from-[#FE5F6E] via-[#923CFF] to-[#2B7CFF]"
             }  text-white font-bold py-2 px-4 rounded focus:outline-none`}
           >
-            {upload ? "Uploading..." : "Update"}
+            {upload ? "Updating..." : "Update"}
           </button>
         </form>
       </div>

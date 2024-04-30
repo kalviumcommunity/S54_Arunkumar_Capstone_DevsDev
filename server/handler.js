@@ -149,7 +149,7 @@ const likeData = async (req, res) => {
         const inputData = req.body;
         const { objId , userId} = inputData;
 
-        if (userId && userId) {
+        if (userId && objId) {
 
             await userModel.updateOne(
                 { 'userId': userId },   
