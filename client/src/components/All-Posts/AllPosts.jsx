@@ -9,6 +9,7 @@ const AllPosts = () => {
   const { id } = user ? user : "";
 
   const [datas, setData] = useState([]);
+  const [savedDatas, setSavedData] = useState([]);
   const [likedDatas, setLikedData] = useState([]);
 
   useEffect(() => {
@@ -27,33 +28,52 @@ const AllPosts = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.removeItem('likedDatas');
+    localStorage.removeItem("savedDatas");
+    localStorage.removeItem("likedDatas");
     const fetchData = async () => {
       try {
         if (id) {
-          const response = await axios.get(
+          const response1 = await axios.get(
             `${import.meta.env.VITE_RENDER_LINK}/api/data/saved/${id}`
           );
-          const { likedproducts } = response.data;
-          
-          // Extract objId from each object in likedproducts array
-          const objIds = likedproducts && likedproducts.map(product => product._id);
-  
-          setLikedData(objIds ? objIds : []);
+
+          const response2 = await axios.get(
+            `${import.meta.env.VITE_RENDER_LINK}/api/data/liked/${id}`
+          );
+
+          const { savedProducts } = response1.data;
+          const { likedProducts } = response2.data;
+
+          // Extract objId from each object in savedDatas array
+          const savedObjIds =
+            savedProducts && savedProducts.map((product) => product._id);
+
+          // Extract objId from each object in savedDatas array
+          const likedObjIds =
+            likedProducts && likedProducts.map((product) => product._id);
+
+          setSavedData(savedObjIds ? savedObjIds : []);
+
+          setLikedData(likedObjIds ? likedObjIds : []);
+
+          localStorage.setItem(
+            "savedDatas",
+            JSON.stringify(savedObjIds ? savedObjIds : [])
+          );
 
           localStorage.setItem(
             "likedDatas",
-            JSON.stringify(objIds ? objIds : [])
+            JSON.stringify(likedObjIds ? likedObjIds : [])
           );
+
         }
       } catch (err) {
         console.log(err);
       }
     };
-  
+
     fetchData();
   }, [id]);
-  
 
   return (
     <div
@@ -83,13 +103,15 @@ const AllPosts = () => {
                 </div>
                 <div className="flex flex-col justify-between h-24">
                   <div className="flex justify-between items-end px-1">
-                    <p className="text-xl text-[#d5d5d5] px-1 pt-2 ">
-                      {data.title}
+                    <p className="text-lg text-[#d5d5d5] pt-2 ">
+                      {data.title.length > 25
+                        ? `${data.title.slice(0, 20)}...`
+                        : data.title}
                     </p>
-                    <span className="textSmall  pr-1">{data.date}</span>
+                    <span className="textSmall ">{data.date}</span>
                   </div>
-                  <div className="flex justify-between items-end px-1">
-                    <p className="text-sm textSmall px-1">{data.username}</p>
+                  <div className="flex justify-between items-end">
+                    <p className="text-sm textSmall">{data.username}</p>
                     <Link to={`/postdetails/${data._id}`}>
                       <img
                         className="h-12 hover:cursor-pointer flex self-end"

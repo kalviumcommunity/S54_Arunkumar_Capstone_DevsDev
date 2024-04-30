@@ -34,6 +34,7 @@ const PricingPage = () => {
 
   return (
     <div className="h-full">
+          UpComing
       <div className="w-full flex justify-center">
         <div className="w-80 bg-[#1E1E1E] flex py-2 px-4 justify-between rounded-2xl">
           <button

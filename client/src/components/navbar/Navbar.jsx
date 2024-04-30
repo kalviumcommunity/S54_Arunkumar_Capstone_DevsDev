@@ -13,11 +13,9 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between flex-wrap py-4 px-12 w-full borderGradientNav">
        
-      <Link to='/'>
-        <div>
+        <div className='hover:cursor-default'>
           <span className="bg-gradient-to-r from-[#FE5F6E] via-[#923CFF] to-[#2B7CFF] text-transparent bg-clip-text text-2xl font-semibold">Dev'sDev</span>
         </div>
-      </Link>
 
       <div className="w-4/12 px-2 rounded-xl gradient-border outline-none bg-[#1e1e1e]">
           <input

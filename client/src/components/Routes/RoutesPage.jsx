@@ -10,6 +10,7 @@ import PostDetails from '../Post-Details/PostDetails';
 import SignInComp from '../sign-in/SignIn';
 import SignUpComp from '../Sign-Up/SignUp';
 import Faqs from '../Faqs/Faqs';
+import UpdateForm from '../Update-Modal/UpdateForm';
 
 const RoutesPage = () => {
   return (
@@ -19,6 +20,7 @@ const RoutesPage = () => {
       <Route path='/community' element={<CommunityPage />} />
       <Route path='/pricing' element={<PricingPage />} />
       <Route path='/saved' element={<SavedPage />} />
+      <Route path='/update/:id' element={<UpdateForm />} />
       <Route path='/postdetails/:id' element={<PostDetails />} />
       <Route path='/signin' element={<SignInComp />} />
       <Route path='/signup' element={<SignUpComp />} />

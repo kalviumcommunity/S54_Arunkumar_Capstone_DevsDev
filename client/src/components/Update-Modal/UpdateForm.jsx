@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -8,21 +8,26 @@ import { addToCloudinary } from "../addToCloudinary";
 
 import { useClerk } from "@clerk/clerk-react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const AddPostModal = () => {
+const UpdateForm = () => {
+
+  const {id} = useParams()
+  // console.log('id: ', id);
+  const location = useLocation();
+
+  const { state } = location;
+
   const { user } = useClerk();
-  console.log('user: ', user);
   const userId = user ? user.id : "";
   const username = user ? user.fullName : "";
-  console.log('userId: ', userId);  
   const pfp = user ? user.imageUrl : "";
 
-  const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     reset,
     control,
@@ -32,7 +37,7 @@ const AddPostModal = () => {
   const [hoveredImageIndex, setHoveredImageIndex] = useState(null);
   const [upload, setUpload] = useState(false);
 
-   const getCurrentDate = () => {
+  const getCurrentDate = () => {
     const currentDate = new Date();
     const day = String(currentDate.getDate()).padStart(2, "0");
     const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Month is zero-based
@@ -42,6 +47,8 @@ const AddPostModal = () => {
   };
 
   const date = getCurrentDate();
+
+  const navigate = useNavigate()
 
   const communities = [
     { value: "amazon", label: "Amazon" },
@@ -84,9 +91,9 @@ const AddPostModal = () => {
   };
 
   // Function to handle image removal
-  const handleRemoveImage = (index,e) => {
-    e.stopPropagation()
-    e.preventDefault()
+  const handleRemoveImage = (index, e) => {
+    e.stopPropagation();
+    e.preventDefault();
     const updatedImages = images.filter((image, i) => i !== index);
     setImages(updatedImages);
   };
@@ -115,72 +122,80 @@ const AddPostModal = () => {
     multiple: true,
   });
 
-  const onSubmit = async (formData,e) => {
+  const onSubmit = async (formData, e) => {
+    e.preventDefault();
 
-    e.preventDefault()
-
-    if (images.length === 0) {
-      toast.error("Please upload at least one image.");
-      return;
-    }
+    // if (images.length === 0) {
+    //   toast.error("Please upload at least one image.");
+    //   return;
+    // }
+    
     if (images.length > 10) {
       toast.error("Please upload max 10 image.");
       return;
     }
 
     setUpload(true); // Set upload state to true while uploading
-
     const data = await addToCloudinary(images);
+
     // console.log('imageData: ', data);
 
     formData.data = data;
-    formData.userId = userId;
-    formData.username = username;
-    formData.pfp = pfp;
+    formData.objId = state._id ;
     formData.date = date;
+    console.log('formData: ', formData);
 
     // console.log('Form data with cloudinaryImageData:', formData);
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_RENDER_LINK}/api/data/create`,
+      const response = await axios.put(
+        `${import.meta.env.VITE_RENDER_LINK}/api/data/update/${id}`,
         formData
       );
-      console.log('Response:', response.data);
+      console.log("Response:", response.data);
 
       toast.success(response.data.message);
 
       setUpload(false);
-      
-      reset();
+
+      // reset();
       setImages([]);
+      toast.success("post updated successfully")
       setTimeout(() => {
         navigate("/")
       }, 1000);
-      
     } catch (error) {
       setUpload(false);
       console.error("Error:", error);
     }
   };
 
+  useEffect(() => {
+
+    if (state) {
+      setValue("title", state.title);
+      setValue("community", state.community);
+      setValue("description", state.description);
+    }
+  }, [state, setValue]);
+
   return (
     <>
       <div className="w-full bg-[#1E1E1E] rounded-lg shadow-lg py-6 px-8">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <input
-              type="text"
-              id="title"
-              name="title"
-              placeholder="Title"
-              className="w-full rounded px-4 py-2 focus:outline-none bg-[#181818] focus:border-blue-200 text-white"
-              {...register("title", {
-                required: true,
-                minLength: 5,
-                maxLength: 30,
-              })}
-            />
+          <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Title"
+        className="w-full rounded px-4 py-2 focus:outline-none bg-[#181818] focus:border-blue-200 text-white"
+        {...register("title", {
+          required: true,
+          minLength: 5,
+          maxLength: 30,
+        })}
+      />
 
             {errors.title && errors.title.type === "required" && (
               <p className="text-red-500 mt-1">Title is required</p>
@@ -206,7 +221,7 @@ const AddPostModal = () => {
               render={({ field }) => (
                 <select
                   {...field}
-                  className={`w-full rounded px-4 py-2 hover:cursor-pointer focus:outline-none bg-[#181818] focus:border-blue-200 text-white ${
+                  className={`w-full  rounded px-4 py-2 focus:outline-none bg-[#181818] focus:border-blue-200 text-white ${
                     errors.community ? "border-red-500" : ""
                   }`}
                 >
@@ -274,7 +289,7 @@ const AddPostModal = () => {
                     onMouseLeave={handleMouseLeave}
                   >
                     <img
-                      src={URL.createObjectURL(file)}
+                      src={ URL.createObjectURL(file) }
                       alt="Dropped"
                       className="w-44 max-w-full  max-h-24"
                     />
@@ -292,7 +307,7 @@ const AddPostModal = () => {
 
               {images.length === 0 && (
                 <p className="text-white">
-                  Drag & Drop your image(s) here or click to upload
+                 Add More Images
                 </p>
               )}
             </div>
@@ -308,7 +323,7 @@ const AddPostModal = () => {
               upload ? "bg-gray" : "from-[#FE5F6E] via-[#923CFF] to-[#2B7CFF]"
             }  text-white font-bold py-2 px-4 rounded focus:outline-none`}
           >
-            {upload ? "Uploading..." : "Submit"}
+            {upload ? "Uploading..." : "Update"}
           </button>
         </form>
       </div>
@@ -317,4 +332,4 @@ const AddPostModal = () => {
   );
 };
 
-export default AddPostModal ;
+export default UpdateForm;
