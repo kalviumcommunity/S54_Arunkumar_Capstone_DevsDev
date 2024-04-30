@@ -60,17 +60,32 @@ const dataSchema = new mongoose.Schema(
         },
         
         comments:[
-            {
-                commentText : {
+
+            {   userId:{
+                    type : String,
+                    required:true,
+                    trim : true
+            },
+                username:{
+                    type : String,
+                    required:true,
+                    trim : true
+            },
+                comment: {
                     type : String,
                     required:true,
                     trim : true
                 },
-                replies:[{
+                date : {
                     type : String,
                     required:true,
                     trim : true
-                }],
+                },
+                pfp : {
+                    type : String,
+                    required:true,
+                    trim : true
+                }
             }
         ]
     }

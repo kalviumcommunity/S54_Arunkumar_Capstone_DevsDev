@@ -4,8 +4,14 @@ meta {
   seq: 7
 }
 
-put {
-  url: http://localhost:3050/api/data/update/pfp/:id
-  body: none
+patch {
+  url: http://localhost:3050/api/data/update/pfp/user_2erbqR37Z8TWWh57Xl6UBhC19y5
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "pfp":"https://th.bing.com/th/id/OIP.fN9gx82LKxSZVpTc18meBgHaEo?w=297&h=185&c=7&r=0&o=5&dpr=1.4&pid=1.7"
+  }
 }

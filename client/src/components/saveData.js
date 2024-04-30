@@ -14,14 +14,14 @@ const saveData = async(objId,userId) =>{
           saveObjData
         );
 
-        let likedDatas = localStorage.getItem('likedDatas');
-        likedDatas = JSON.parse(likedDatas);
+        let savedDatas = localStorage.getItem('savedDatas');
+        savedDatas = JSON.parse(savedDatas);
 
         // Add the new objId to the array
-        likedDatas.push(objId);
+        savedDatas.push(objId);
 
         // Store the updated array back in localStorage
-        localStorage.setItem('likedDatas', JSON.stringify(likedDatas));
+        localStorage.setItem('savedDatas', JSON.stringify(savedDatas));
 
 
        return
@@ -44,15 +44,15 @@ const deleteData = async (objId, userId) => {
           { data: delObjData }
       );
 
-      let likedDatas = localStorage.getItem('likedDatas');
-      likedDatas = likedDatas ? JSON.parse(likedDatas) : [];
+      let savedDatas = localStorage.getItem('savedDatas');
+      savedDatas = savedDatas ? JSON.parse(savedDatas) : [];
 
-      const index = likedDatas.indexOf(objId);
+      const index = savedDatas.indexOf(objId);
       if (index !== -1) {
 
-        likedDatas.splice(index, 1);
+        savedDatas.splice(index, 1);
 
-        localStorage.setItem('likedDatas', JSON.stringify(likedDatas));
+        localStorage.setItem('savedDatas', JSON.stringify(savedDatas));
     }
 
 

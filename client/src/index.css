@@ -16,7 +16,7 @@ body{
   background-color: #181818;
   color: white;
   font-weight: lighter;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .borderGradient {

@@ -60,11 +60,11 @@ const LandingPage = () => {
     }, [pfp, username]);
 
     return (
-        <>
+        <div className=''>
             <Navbar />
             <Content />
             {/* <Footer /> */}
-        </>
+        </div>
     );
 };
 
