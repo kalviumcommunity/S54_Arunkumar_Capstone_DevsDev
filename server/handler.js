@@ -27,6 +27,38 @@ const readData = async(req,res)=>{
 
 }
 
+const searchData = async (req, res) => {
+    const searchTerm = req.query.query;
+
+    try {
+
+        if (searchTerm[0].toLowerCase() === 'u') {
+
+            const searchDatas = await DataModel.find({
+                username: searchTerm.substring(2)
+            });
+            res.status(200).json(searchDatas);
+
+        } else if (searchTerm[0].toLowerCase() === 'c') {
+
+            const searchDatas = await DataModel.find(
+                {
+                    community: searchTerm.substring(2).toLowerCase()
+                }
+            );
+            res.status(200).json(searchDatas);
+
+        } else {
+            res.status(200).json("No datas found");
+        }
+
+    } catch (error) {
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
 // Saving Data
 const savedData = async (req, res) => {
     const userId = req.params.userId;
@@ -377,4 +409,5 @@ module.exports = {
     likeData,
     deleteLike,
     likedData,
+    searchData,
 }
