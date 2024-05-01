@@ -11,6 +11,7 @@ import SignInComp from '../sign-in/SignIn';
 import SignUpComp from '../Sign-Up/SignUp';
 import Faqs from '../Faqs/Faqs';
 import UpdateForm from '../Update-Modal/UpdateForm';
+import SearchResult from '../Search-result/SearchResult';
 
 const RoutesPage = () => {
   return (
@@ -24,6 +25,7 @@ const RoutesPage = () => {
       <Route path='/postdetails/:id' element={<PostDetails />} />
       <Route path='/signin' element={<SignInComp />} />
       <Route path='/signup' element={<SignUpComp />} />
+      <Route path='/search-result/*' element={<SearchResult  />} exact />
       <Route path='/faqs' element={<Faqs />} />
     </Routes>
   );

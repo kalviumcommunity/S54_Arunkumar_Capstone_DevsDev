@@ -3,7 +3,7 @@ const generalRouter = require('express').Router()
 const apiRouter = require('express').Router()
 
 // importing handlers
-const { homeHandler, readData, updateData , createData , readSingleData, updatePfp, saveData, createUser, deleteData, savedData, deletePost, addComment, likeData, deleteLike, likedData } = require('./handler')
+const { homeHandler, readData, updateData , createData , readSingleData, updatePfp, saveData, createUser, deleteData, savedData, deletePost, addComment, likeData, deleteLike, likedData, searchData} = require('./handler')
 
 // Get req in home
 generalRouter.get('/',homeHandler)
@@ -48,6 +48,9 @@ apiRouter.delete( '/data/deletePost/:id', deletePost )
 
 // delete like 
 apiRouter.delete( '/data/like/delete',  deleteLike)
+
+// delete like 
+apiRouter.get( '/data/search', searchData )
 
 module.exports = {
     generalRouter,
