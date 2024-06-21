@@ -52,15 +52,17 @@ const Navbar = () => {
       </div>
 
       <div className="w-4/12 px-2 rounded-xl gradient-border outline-none bg-[#1e1e1e]">
-        <input
-          className="w-full p-2 rounded-xl border-none outline-none bg-transparent"
-          placeholder="c/(community) or u/(username)"
-          style={{ caretColor: "white" }}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
+      <input
+        className="w-full p-2 rounded-xl border-none outline-none bg-transparent"
+        placeholder="search"
+        style={{ caretColor: "white" }}
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+        onKeyDown={handleKeyDown}
+      />
+    </div>
 
       <header>
         <SignedOut>
