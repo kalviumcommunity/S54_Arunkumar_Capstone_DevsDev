@@ -12,14 +12,14 @@ const updatePfp = async (id, pfp) => {
         return true;
     } catch (error) {
         console.error('Error:', error);
-        return false; // Indicate update failed
+        return false;
     }
 };
 
-const postUser = async (id) => {
+const postUser = async (id,emailId,fullName) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_RENDER_LINK}/api/data/create/user`, { 'userId': id });
-        return true; // Indicate successful update
+        const response = await axios.post(`${import.meta.env.VITE_RENDER_LINK}/api/data/create/user`, { 'userId': id , 'emailId' : emailId , 'fullName' : fullName});
+        return true;
     } catch (error) {
         console.error('Error:', error);
         return false; 
@@ -29,14 +29,15 @@ const postUser = async (id) => {
 const LandingPage = () => {
 
     const { user } = useClerk();
-    const { username, imageUrl, id } = user || {};
+    const { fullName, imageUrl, id } = user || {};
+    const emailId = user ? user.primaryEmailAddress['emailAddress'] : ' '
     const [pfp, setPfp] = useState(localStorage.getItem('pfp') || '');
 
     useEffect(() => {
 
       const userLogin = async (id) => {
           if (user) {
-              const response = await postUser(id);
+              const response = await postUser(id,emailId,fullName);
           }
       };
   
@@ -57,7 +58,7 @@ const LandingPage = () => {
         };
 
         handlePfpChange();
-    }, [pfp, username]);
+    }, [pfp, fullName]);
 
     return (
         <div className=''>

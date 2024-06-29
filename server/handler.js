@@ -1,7 +1,7 @@
-const { default: mongoose } = require("mongoose");
+const { mongoose } = require("mongoose");
 const { DataModel } = require("./schema/dataSchema");
-const { savedModel, userModel } = require("./schema/userData");
-
+const { userModel } = require("./schema/userData");
+const nodeMailer = require('./nodeMailer');
 // homeHandler (get)
 const homeHandler = async(req,res)=>{
 
@@ -125,7 +125,7 @@ const createData = async(req,res)=>{
 const createUser = async (req, res) => {
     try {
         const inputData = req.body;
-        const { userId } = inputData;
+        const { userId , emailId , fullName } = inputData;
 
         const existingUser = await userModel.findOne({ 'userId': userId });
         if (existingUser) {
@@ -133,7 +133,7 @@ const createUser = async (req, res) => {
         }
 
         await userModel.create(inputData);
-
+        nodeMailer(emailId , fullName)
         return res.status(201).json({ data: inputData, message: "User added successfully" });
     } catch (error) {
         console.error('Error occurred:', error);
@@ -148,7 +148,7 @@ const saveData = async (req, res) => {
         const inputData = req.body;
         const { objId , userId} = inputData;
 
-        if (userId && userId) {
+        if (userId) {
 
             await userModel.updateOne(
                 { 'userId': userId },   

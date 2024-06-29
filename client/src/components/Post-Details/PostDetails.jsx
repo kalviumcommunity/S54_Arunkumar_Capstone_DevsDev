@@ -412,12 +412,15 @@ const PostDetails = () => {
               <div className="modal-content py-2 text-left px-2 flex justify-between items-center">
                 {/* Left section with buttons */}
                 <div className="flex items-center gap-x-4">
-                  <button
-                    className="text-red-500 hover:text-red-700"
-                    onClick={handleUpdate}
-                  >
-                    Update
-                  </button>
+                  {user && datas.userId === user.id && (
+                    <button
+                      className="text-red-500 hover:text-red-700"
+                      onClick={handleUpdate}
+                    >
+                      Update
+                    </button>
+                  )}
+
                   {user && datas.userId === user.id && (
                     <button
                       className="text-red-500 hover:text-red-700"
@@ -426,7 +429,14 @@ const PostDetails = () => {
                       Delete
                     </button>
                   )}
-                </div>
+
+                    <button
+                      className="text-red-500 hover:text-red-700"
+                      onClick={handleDelete}
+                    >
+                      More
+                    </button>
+
 
                 {/* Right section with close button */}
                 <button
@@ -446,6 +456,7 @@ const PostDetails = () => {
                     ></path>
                   </svg>
                 </button>
+                </div>
               </div>
             </div>
           </div>

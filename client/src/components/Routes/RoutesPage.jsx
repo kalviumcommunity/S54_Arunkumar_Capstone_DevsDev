@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LandingPage from '../Landing-Page/LandingPage';
-import CommunityPage from '../Community/CommunityPage';
+// import CommunityPage from '../Community/CommunityPage';
 import PricingPage from '../Pricing/PricingPage';
 import SavedPage from '../Saved/SavedPage';
 import PostPage from '../Post-Page/PostPage';
@@ -12,13 +11,14 @@ import SignUpComp from '../Sign-Up/SignUp';
 import Faqs from '../Faqs/Faqs';
 import UpdateForm from '../Update-Modal/UpdateForm';
 import SearchResult from '../Search-result/SearchResult';
+import HelpPage from '../Help/Help';
 
 const RoutesPage = () => {
   return (
     <Routes>
       <Route path='/' element={<PostPage />} />
       <Route path='/addpost' element={<AddPostModal />} />
-      <Route path='/community' element={<CommunityPage />} />
+      {/* <Route path='/community' element={<CommunityPage />} /> */}
       <Route path='/pricing' element={<PricingPage />} />
       <Route path='/saved' element={<SavedPage />} />
       <Route path='/update/:id' element={<UpdateForm />} />
@@ -27,6 +27,7 @@ const RoutesPage = () => {
       <Route path='/signup' element={<SignUpComp />} />
       <Route path='/search-result/*' element={<SearchResult  />} exact />
       <Route path='/faqs' element={<Faqs />} />
+      <Route path='/help' element={<HelpPage />} />
     </Routes>
   );
 }

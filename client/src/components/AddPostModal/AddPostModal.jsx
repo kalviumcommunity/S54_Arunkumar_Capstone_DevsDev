@@ -12,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 
 const AddPostModal = () => {
   const { user } = useClerk();
-  console.log('user: ', user);
+  // console.log('user: ', user.primaryEmailAddress['emailAddress']);
   const userId = user ? user.id : "";
   const username = user ? user.fullName : "";
-  console.log('userId: ', userId);  
+  // console.log('userId: ', userId);  
   const pfp = user ? user.imageUrl : "";
 
   const navigate = useNavigate()
@@ -146,7 +146,7 @@ const AddPostModal = () => {
         `${import.meta.env.VITE_RENDER_LINK}/api/data/create`,
         formData
       );
-      console.log('Response:', response.data);
+      // console.log('Response:', response.data);
 
       toast.success(response.data.message);
 
