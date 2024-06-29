@@ -41,9 +41,8 @@ const nodeMailer = (emailId , fullName) => {
         </body>`
     };
 
-    console.log('email processing')
     transporter.sendMail(message).then((info) => {
-        console.log('email sent')
+        console.log(info)
     }).catch((err) => {
         console.error('Error sending email:', err);
     });
