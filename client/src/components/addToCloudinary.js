@@ -26,7 +26,7 @@ const addToCloudinary = async (images) => {
       }
     }
     
-    console.log('Images uploaded to Cloudinary:', uploadedImages);
+    // console.log('Images uploaded to Cloudinary:', uploadedImages);
     return uploadedImages;
 
   } catch (error) {
