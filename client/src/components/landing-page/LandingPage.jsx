@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../Navbar/Navbar';
+
 import Content from '../Content/Content';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useClerk } from '@clerk/clerk-react';
+import Navbar from '../navbar/Navbar';
 
 const updatePfp = async (id, pfp) => {
     try {
